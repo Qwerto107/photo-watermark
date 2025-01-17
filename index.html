@@ -1,8 +1,3 @@
-<!--
- * @Date: 2024-12-23
- * @LastEditors: cuijianzhuang
- * @Description: 离线照片水印打码工具
--->
 <!DOCTYPE html>
 <html>
 
@@ -10,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <title>离线照片水印打码工具</title>
+    <title>离线图片水印工具</title>
     <link rel="stylesheet" href="css/styles.css">
     <script src="./js/script.js" defer></script>
 </head>
@@ -19,12 +14,11 @@
     <span class="theme-text">切换主题</span>
 </button>
 <div id="container">
-    <h1>离线照片水印打码工具</h1>
-    <article>安全地为你的图片加水印，无任何网络请求，利用浏览器api实现水印，特别适合各种敏感证（身份证，驾照，护照等）。<a
-            href="https://github.com/cuijianzhuang/photo-watermark">Github地址，求 star</a></article>
+    <h1>离线图片水印工具</h1>
+    <article><a href="https://github.com/cuijianzhuang/photo-watermark">Github 项目地址</a></article>
 
     <div class="align-center-box upload-area">
-        <label>第一步：选择图片上传</label>
+        <label>上传图片</label>
         <div class="upload-container">
             <div class="upload-box drag-area">
                 <input type="file" id="image" autocomplete="off" multiple>
@@ -43,12 +37,12 @@
         </div>
     </div>
     <div class="align-center-box">
-        <label for="text">第二步：输入需要打水印的文字</label>
-        <input style="flex:1;margin-bottom:0" 
-               type="text" 
+        <label for="text">水印文字</label>
+        <input style="flex:1;margin-bottom:0"
+               type="text"
                id="text" 
-               placeholder="请输入文字" 
-               value="版权所有 侵权必究"
+               placeholder="输入文字"
+               value="仅用于 xx 认证"
                spellcheck="false"
                autocomplete="off">
     </div>
@@ -94,6 +88,9 @@
                     <option value="楷体">楷体</option>
                     <option value="隶书">隶书</option>
                     <option value="幼圆">幼圆</option>
+                    <option value="苹方">苹方</option>
+                    <option value="微软雅黑">微软雅黑</option>
+                    <option value="霞鹜文楷">霞鹜文楷</option>
                     <option value="Arial">Arial</option>
                     <option value="Helvetica">Helvetica</option>
                     <option value="Tahoma">Tahoma</option>
@@ -108,37 +105,37 @@
                 <button id="boldToggle" class="style-btn" onclick="toggleFontStyle('bold')" style="flex:1;font-weight:bold;border-radius:3px 0 0 3px">B</button>
                 <button id="italicToggle" class="style-btn" onclick="toggleFontStyle('italic')" style="flex:1;font-style:italic;border-radius:0 3px 3px 0">I</button>
             </div>
-            
-            <div style="flex:1"></div>
+            <label for="size">字号</label>
+            <input style="flex:1;margin-right:15px" type="range" id="size" min="0.5" max="3" step="0.05" autocomplete="off"
+                   value="0.8">
+            <label for="color">颜色</label>
+            <input style="flex:1;margin-right:15px" type="color" id="color" pattern="#[0-9A-Fa-f]{6}" autocomplete="off"
+                   value="#ff0000"><br>
+
+            <label for="alpha">不透明度</label>
+            <input style="flex:1;margin-right:15px" type="range" id="alpha" min="0" max="1" step="0.05" autocomplete="off"
+                   value="0.3"><br>
         </div>
     </div>
 
     <p class="align-center-box">
+        <label for="spacex">x轴间隔</label>
+        <input style="flex:1;margin-right:15px" type="range" id="spacex" min="1" max="8" step="0.4" autocomplete="off"
+            value="0.2"><br>
 
-        <label for="color">颜色</label>
-        <input style="flex:1;margin-right:30px" type="color" id="color" pattern="#[0-9A-Fa-f]{6}" autocomplete="off"
-            value="#ffffff"><br>
-
-        <label for="alpha">不透明度</label>
-        <input style="flex:1;margin-right:30px" type="range" id="alpha" min="0" max="1" step="0.05" autocomplete="off"
-            value="0.3"><br>
-
-        <label for="space">间隔</label>
-        <input style="flex:1;margin-right:30px" type="range" id="space" min="1" max="8" step="0.2" autocomplete="off"
-            value="1.5"><br>
-
-        <label for="size">字号</label>
-        <input style="flex:1;margin-right:30px" type="range" id="size" min="0.5" max="3" step="0.05" autocomplete="off"
-            value="0.8">
+        <label for="spacey">y轴间隔</label>
+        <input style="flex:1;margin-right:15px" type="range" id="spacey" min="1" max="8" step="0.2" autocomplete="off"
+               value="1.5"><br>
+        <br/>
 
         <label for="rotate">旋转角度</label>
-        <input style="flex:1;margin-right:30px" type="range" id="rotate" 
-               min="-90" max="90" step="3" 
-               autocomplete="off" value="45">
-        <span id="rotateValue">45°</span>
+        <input style="flex:1;margin-right:15px" type="range" id="rotate"
+               min="-90" max="90" step="2"
+               autocomplete="off" value="-36">
+        <span id="rotateValue">-36°</span>
     </p>
 
-    <label for="text">第三步：点击图片进行单个图片下载</label>
+    <label for="text">下载图片</label>
     <div class="button-group">
         <button class="btn btn-primary" onclick="downloadAll()">
             <span class="btn-icon">⬇️</span>
@@ -151,8 +148,7 @@
     </div>
     <p id="graph"></p>
     <footer style="text-align: center; margin-top: 30px; padding: 20px 0; color: #666; font-size: 14px; border-top: 1px solid #eee;">
-        <p>© 2024 离线照片水印打码工具 | 作者：<a href="https://github.com/cuijianzhuang" style="color: #3498db; text-decoration: none;">cuijianzhuang</a></p>
-        <p style="margin-top: 5px; font-size: 13px;">本工具完全离线运行，保护您的隐私安全</p>
+        <p>离线图片水印工具 | 作者：<a href="https://github.com/cuijianzhuang" style="color: #3498db; text-decoration: none;">cuijianzhuang</a></p>
     </footer>
 </div>
 <div id="previewModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; justify-content:center; align-items:center;">

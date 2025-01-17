@@ -5,7 +5,7 @@ $ = function (sel) {
     return document.querySelector(sel);
 };
 
-inputItems = ['text', 'color', 'alpha', 'space', 'size', 'rotate', 'watermarkPattern', 'watermarkCount', 'watermarkPosition', 'fontFamily'];
+inputItems = ['text', 'color', 'alpha', 'spacex', 'spacey', 'size', 'rotate', 'watermarkPattern', 'watermarkCount', 'watermarkPosition', 'fontFamily'];
 
 configInputSetting = {}; // 保存所有水印
 allCanvas = []; // 保存所有的canvas
@@ -473,8 +473,8 @@ const drawText = (canvas, img) => {
             textCtx.rotate(angle * Math.PI / 180);
 
             const maxLineWidth = Math.max(...lines.map(line => textCtx.measureText(line).width));
-            const xStep = maxLineWidth + textCtx.measureText('啊').width;
-            const yStep = configInputSetting.space.value * (totalHeight + textSize);
+            const xStep = configInputSetting.spacex.value * (maxLineWidth + textCtx.measureText('啊').width);
+            const yStep = configInputSetting.spacey.value * (totalHeight + textSize);
             const rectWidth = diagonal;
             const rectHeight = diagonal;
             const startX = -rectWidth / 2;
